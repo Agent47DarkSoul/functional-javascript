@@ -1,4 +1,7 @@
-function sumOfOperation(from, to, operation) {
+var assert = require('assert');
+var common = require('./common');
+
+function sumOfOperation (from, to, operation) {
   if (from > to) {
     return 0;
   } else {
@@ -6,17 +9,11 @@ function sumOfOperation(from, to, operation) {
   }
 }
 
-var result = sumOfOperation(1, 3, function (n) { return n; });
-console.log('Result: ' + result);
+var sumOfNumbers = sumOfOperation(1, 3, function (n) { return n; });
+assert(sumOfNumbers === 6, 'Sum of numbers failed: Expected 6, Got ' + sumOfNumbers);
 
-result = sumOfOperation(1, 3, function (n) { return n * n * n; });
-console.log('Result: ' + result);
+var sumOfCubes = sumOfOperation(1, 3, function (n) { return n * n * n; });
+assert(sumOfCubes === 36, 'Sum of cubes failed: Expected 36, Got ' + sumOfCubes);
 
-var factorial = function (n) {
-  if (n == 0) { return 1; }
-  else { return n * factorial(n - 1); }
-}
-
-
-result = sumOfOperation(1, 3, factorial);
-console.log('Result: ' + result);
+var sumOfFactorials = sumOfOperation(1, 3, common.factorial);
+assert(sumOfFactorials === 9, 'Sum of factorials failed: Expected 9, Got ' + sumOfFactorials);
