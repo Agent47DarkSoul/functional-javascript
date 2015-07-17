@@ -2,11 +2,18 @@ var assert = require('assert');
 var common = require('./common');
 
 function sumOfOperation (from, to, operation) {
-  if (from > to) {
-    return 0;
-  } else {
-    return operation(from) + sumOfOperation(from + 1, to, operation);
+  function loop(current, accumulator) {
+    if (current > to) { return accumulator; }
+    else {
+      // This changes for different problems
+      var accumulation = accumulator + operation(current);
+
+      // This will always be like this
+      return loop(current + 1, accumulation)
+    }
   }
+
+  return loop(from, 0);
 }
 
 var sumOfNumbers = sumOfOperation(1, 3, function (n) { return n; });
