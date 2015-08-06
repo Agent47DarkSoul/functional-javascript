@@ -8,6 +8,14 @@ var person = {
   }
 };
 
+Function.prototype.bindIt = function(context) {
+  var fn = this;
+
+  return function () {
+    return fn.apply(context, arguments);
+  };
+};
+
 function invoker (reason, fn) {
   console.log('Reason: ', reason);
   return fn();
@@ -19,6 +27,6 @@ function invoker (reason, fn) {
 })();
 
 (function () {
-  var answer = invoker('Having Fun', person.getName);
+  var answer = invoker('Having Fun', person.getName.bindIt(person));
   assert(answer === "Danish Satkut", answer);
 })();
